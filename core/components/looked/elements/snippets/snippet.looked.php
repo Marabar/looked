@@ -5,13 +5,12 @@ if (!$Looked = $modx->getService('looked', 'Looked', $modx->getOption('looked_co
 }
 
 if (isset($_SESSION['looked']) && !empty($_SESSION['looked'])) {
-	$id = $modx->resource->id;
+	$id = $modx->resource->get('id');
 	$arrIds = $_SESSION['looked'];
-	$ids = implode(',', $_SESSION['looked']);
-	//
 	if(($key = array_search($id, $arrIds)) !== false){
 		unset($arrIds[$key]);
 	}
+    $ids = implode(',', $arrIds);
 }
 else {
 	return;

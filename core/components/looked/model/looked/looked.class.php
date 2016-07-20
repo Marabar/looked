@@ -86,11 +86,11 @@ class Looked {
 		if ($snippet = $this->modx->getObject('modSnippet', array('name' => $name))) {
 			$properties = $snippet->getProperties();
 			$scriptProperties = array_merge($properties, $scriptProperties);
-			
+            
 			$response = $snippet->process($scriptProperties);
 			
 		}
-		
+        
 		return $response;
 	}
 
