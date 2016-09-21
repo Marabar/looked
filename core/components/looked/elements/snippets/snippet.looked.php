@@ -15,6 +15,8 @@ if (isset($_SESSION['looked']) && !empty($_SESSION['looked'])) {
 else {
 	return;
 }
+if (empty($ids))
+    return;
 
 $output = '';
 
