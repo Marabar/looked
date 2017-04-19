@@ -51,27 +51,6 @@ $builder->registerNamespace(PKG_NAME_LOWER, false, true, PKG_NAMESPACE_PATH);
 
 $modx->log(modX::LOG_LEVEL_INFO, 'Created Transport Package and Namespace.');
 
-// load system settings
-/*if (defined('BUILD_SETTING_UPDATE')) {
-    $settings = include $sources['data'] . 'transport.settings.php';
-    if (!is_array($settings)) {
-        $modx->log(modX::LOG_LEVEL_ERROR, 'Could not package in settings.');
-    } else {
-        $attributes = array(
-            xPDOTransport::UNIQUE_KEY => 'key',
-            xPDOTransport::PRESERVE_KEYS => true,
-            xPDOTransport::UPDATE_OBJECT => BUILD_SETTING_UPDATE,
-        );
-        foreach ($settings as $setting) {
-            $vehicle = $builder->createVehicle($setting, $attributes);
-            $builder->putVehicle($vehicle);
-        }
-        $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in ' . count($settings) . ' System Settings.');
-    }
-    unset($settings, $setting, $attributes);
-}
-*/
-
 // create category
 $modx->log(xPDO::LOG_LEVEL_INFO, 'Created category.');
 /** @var modCategory $category */
@@ -119,12 +98,6 @@ if (defined('BUILD_CHUNK_UPDATE')) {
 
 $vehicle = $builder->createVehicle($category, $attr);
 
-// now pack in resolvers
-/*$vehicle->resolve('file', array(
-    'source' => $sources['source_assets'],
-    'target' => "return MODX_ASSETS_PATH . 'components/';",
-));
-*/
 $vehicle->resolve('file', array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",

@@ -7,6 +7,7 @@ if (!$Looked = $modx->getService('looked', 'Looked', $modx->getOption('looked_co
 if (isset($_SESSION['looked']) && !empty($_SESSION['looked'])) {
 	$id = $modx->resource->get('id');
 	$arrIds = $_SESSION['looked'];
+    $modx->toPlaceholder('count', count($arrIds), 'looked');
 	if(($key = array_search($id, $arrIds)) !== false){
 		unset($arrIds[$key]);
 	}
