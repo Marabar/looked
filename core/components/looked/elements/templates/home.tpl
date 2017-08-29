@@ -1,1 +1,0 @@
-<div id="looked-panel-home-div"></div>

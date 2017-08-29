@@ -35,6 +35,10 @@ $tmp = array(
 		'type' => 'textfield',
 		'value' => '',
 	),
+    'frontendJs' => array(
+        'type' => 'textfield',
+        'value' => 'components/looked/js/web/looked.js',
+    ),
 );
 
 foreach ($tmp as $k => $v) {
