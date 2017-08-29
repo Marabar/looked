@@ -1,7 +1,10 @@
 <?php
 
-if (!$Looked = $modx->getService('looked', 'Looked', $modx->getOption('looked_core_path', null, $modx->getOption('core_path') . 'components/looked/') . 'model/looked/', $scriptProperties)) {
-	return;
+if (!$Looked = $modx->getService('looked', 'Looked', $modx->getOption('looked_core_path',
+        null, $modx->getOption('core_path') . 'components/looked/') . 'model/looked/',
+    $scriptProperties)
+) {
+    return '';
 }
 
 $templates = $modx->getOption('templates', $scriptProperties, '');
@@ -16,20 +19,15 @@ $arrTemplate = !empty($templates)
 if (empty($arrTemplate) || in_array($template, $arrTemplate)) {
 	
 	if (!isset($_SESSION['looked'])) {
-
 		$_SESSION['looked'] = array();
 		$_SESSION['looked'][] = $id;
-
 	} else {
-
 		if (in_array($id, $_SESSION['looked']) === false) {
 			array_unshift($_SESSION['looked'], $id);
 		}
-
 		if (count($_SESSION['looked']) > $limit) {
 			array_pop($_SESSION['looked']);
 		}
-
 	}
 	
 	return;
