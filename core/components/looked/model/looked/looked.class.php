@@ -53,7 +53,7 @@ class Looked {
             return $response;
         } else {
             return $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon(
-                    'looked_err_empty_snippet') . $name
+                    'looked_err_empty_snippet') . ' ' . $name
             );
         }
 	}

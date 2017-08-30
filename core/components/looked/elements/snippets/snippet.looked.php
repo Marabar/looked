@@ -7,21 +7,23 @@ if (!$Looked = $modx->getService('looked', 'Looked', $modx->getOption('looked_co
 	return '';
 }
 
+$output = '';
+
 if (isset($_SESSION['looked']) && !empty($_SESSION['looked'])) {
 	$id = $modx->resource->get('id');
 	$arrIds = $_SESSION['looked'];
-    $modx->toPlaceholder('count', count($arrIds), 'looked');
-	if(($key = array_search($id, $arrIds)) !== false){
+	$count = count($arrIds);
+	if($key = array_search($id, $arrIds)){
 		unset($arrIds[$key]);
+		$count = $count - 1;
 	}
+    $modx->toPlaceholder('count', $count, 'looked');
     $ids = implode(',', $arrIds);
 } else {
 	return '';
 }
 if (empty($ids))
-    return;
-
-$output = '';
+    return '';
 
 if ($scriptProperties['ids'] == true) {
 	$output = $ids;
