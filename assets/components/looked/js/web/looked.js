@@ -1,6 +1,7 @@
 var Looked = {
     initialize: function(config) {
         actionPath = config.actionUrl;
+        resId = config.id;
         selectorRemove = '.looked-remove';
         selectorRemoveParent = '.looked-';
         selectorBlock = '.looked-wrap';
@@ -17,7 +18,8 @@ var Looked = {
 
             var sendData = {
                 action: $(this).data('looked'),
-                resource: id
+                resource: id,
+                id: resId
             };
 
             Looked.send(sendData);
@@ -45,7 +47,6 @@ var Looked = {
                 }
             },
             error: function(data){
-
                 console.log(data);
             }
         });

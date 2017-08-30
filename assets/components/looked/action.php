@@ -26,7 +26,7 @@ if ($modx->error->hasError() || !($Looked instanceof Looked)) {
 switch ($action) {
     case 'looked/remove':
     case 'looked/remove/all':
-        $response = $Looked->remove($_REQUEST['resource']);
+        $response = $Looked->remove($_REQUEST['resource'], $_REQUEST['id']);
         break;
 }
 if (is_array($response)) {

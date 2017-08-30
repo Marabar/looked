@@ -71,14 +71,17 @@ class Looked {
     }
 
 
-    public function remove($resource)
+    public function remove($resource, $id)
     {
-        $id = (int) $resource;
-        if ($id) {
+        $removeId = (int) $resource;
+        $id = (int) $id;
+        if ($removeId) {
             $ids = $_SESSION['looked'];
-            if ($key = array_search($id, $ids)) {
+            if ($key = array_search($removeId, $ids)) {
                 unset($_SESSION['looked'][$key]);
-                $count = count($_SESSION['looked']);
+                $count = in_array($id, $ids)
+                    ? count($_SESSION['looked']) - 1
+                    : count($_SESSION['looked']);
 
                 return $this->success('', $count);
             } else {
