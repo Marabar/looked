@@ -1,4 +1,7 @@
 <?php
+/** @var modX $modx */
+/** @var array $scriptProperties */
+/** @var Looked $Looked */
 
 if (!$Looked = $modx->getService('looked', 'Looked', $modx->getOption('looked_core_path',
         null, $modx->getOption('core_path') . 'components/looked/') . 'model/looked/',
@@ -28,8 +31,9 @@ if (empty($ids))
 if ($scriptProperties['ids'] == true) {
 	$output = $ids;
 } else {
-	$out = $Looked->process($scriptProperties, $ids);
-	$output = $Looked->getChunk($scriptProperties['tplOuter'], array('output' => $out));
+	if ($out = $Looked->process($scriptProperties, $ids)) {
+        $output = $Looked->getChunk($scriptProperties['tplOuter'], array('output' => $out));
+    }
 }
 
 if (!empty($frontendJs)) {

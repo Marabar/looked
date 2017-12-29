@@ -1,4 +1,7 @@
 <?php
+/** @var modX $modx */
+/** @var array $scriptProperties */
+/** @var Looked $Looked */
 
 if (!$Looked = $modx->getService('looked', 'Looked', $modx->getOption('looked_core_path',
         null, $modx->getOption('core_path') . 'components/looked/') . 'model/looked/',
@@ -17,7 +20,6 @@ $arrTemplate = !empty($templates)
 	: array();
 
 if (empty($arrTemplate) || in_array($template, $arrTemplate)) {
-	
 	if (!isset($_SESSION['looked'])) {
 		$_SESSION['looked'] = array();
 		$_SESSION['looked'][] = $id;
@@ -29,8 +31,6 @@ if (empty($arrTemplate) || in_array($template, $arrTemplate)) {
 			array_pop($_SESSION['looked']);
 		}
 	}
-	
 	return;
 }
-
 return;

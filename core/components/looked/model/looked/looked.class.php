@@ -3,7 +3,7 @@
 class Looked {
 	/** @var modX $modx */
 	public $modx;
-
+    /** @var pdoTools $pdoTools */
 	public $pdoTools;
 
 
@@ -14,8 +14,10 @@ class Looked {
 	function __construct(modX &$modx, array $config = array()) {
 		$this->modx =& $modx;
 
-		$corePath = $this->modx->getOption('looked_core_path', $config, $this->modx->getOption('core_path') . 'components/looked/');
-		$assetsUrl = $this->modx->getOption('looked_assets_url', $config, $this->modx->getOption('assets_url') . 'components/looked/');
+		$corePath = $this->modx->getOption('looked_core_path', $config,
+            $this->modx->getOption('core_path') . 'components/looked/');
+		$assetsUrl = $this->modx->getOption('looked_assets_url', $config,
+            $this->modx->getOption('assets_url') . 'components/looked/');
 
         $actionUrl = $assetsUrl . 'action.php';
 
@@ -35,7 +37,11 @@ class Looked {
 		$this->modx->lexicon->load('looked:default');
 	}
 
-	
+    /**
+     * @param array $scriptProperties
+     * @param $ids
+     * @return bool
+     */
 	public function process(array $scriptProperties, $ids)
     {
 		$name = $scriptProperties['snippet'];
@@ -52,13 +58,18 @@ class Looked {
 
             return $response;
         } else {
-            return $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon(
+		    $this->modx->log(modX::LOG_LEVEL_ERROR, $this->modx->lexicon(
                     'looked_err_empty_snippet') . ' ' . $name
             );
         }
+        return false;
 	}
 
-
+    /**
+     * @param $chunk
+     * @param array $properties
+     * @return mixed|string
+     */
     public function getChunk($chunk, $properties = array())
     {
         if ($this->pdoTools = $this->modx->getService('pdoTools')) {
@@ -70,7 +81,11 @@ class Looked {
         return $response;
     }
 
-
+    /**
+     * @param $resource
+     * @param $id
+     * @return array|string
+     */
     public function remove($resource, $id)
     {
         $removeId = (int) $resource;
@@ -94,7 +109,11 @@ class Looked {
         }
     }
 
-
+    /**
+     * @param string $message
+     * @param $count
+     * @return array|string
+     */
     public function success($message = '', $count)
     {
         $response = array(
@@ -102,23 +121,23 @@ class Looked {
             'message' => $this->modx->lexicon($message),
             'count' => $count,
         );
-
         return $this->config['json_response']
             ? json_encode($response)
             : $response;
     }
 
-
+    /**
+     * @param string $message
+     * @return array|string
+     */
     public function error($message = '')
     {
         $response = array(
             'success' => false,
             'message' => $this->modx->lexicon($message),
         );
-
         return $this->config['json_response']
             ? json_encode($response)
             : $response;
     }
-
 }

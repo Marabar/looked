@@ -1,4 +1,6 @@
 <?php
+/** @var modX $modx */
+/** @var Looked $Looked */
 
 if (empty($_REQUEST['action'])) {
     die('Access denied');
